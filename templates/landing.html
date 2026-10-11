@@ -4,127 +4,120 @@
 
 {% block content %}
 
+{# hero redesigned to match mockup; only hero section changed #}
 <section class="hero">
-  <div class="hero-container">
-
-    <!-- Top badge -->
-    <div class="hero-badge">
-      ● Free to use · No credit card needed
+    <div class="hero-inner">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Free to use · No credit card needed
+        </div>
+        <h1 class="hero-title">
+            Track every rupee.<br>
+            <em>Know where it goes.</em>
+        </h1>
+        <p class="hero-subtitle">
+            Spendly helps you log expenses, spot patterns, and stay<br>
+            on budget — without the spreadsheet headache.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('register') }}" class="btn-black">Create free account</a>
+            <a href="#" onclick="openModal(); return false;" class="btn-black">See how it works</a>
+        </div>
     </div>
-
-    <!-- Heading -->
-    <h1 class="hero-title">
-      Track every rupee.<br>
-      <span>Know where it goes.</span>
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="hero-subtitle">
-      Spendly helps you log expenses, spot patterns, and stay
-      <br>on budget — without the spreadsheet headache.
-    </p>
-
-    <!-- Buttons -->
-    <div class="hero-actions">
-      <a href="#" class="btn primary">Create free account</a>
-      <a href="#" class="btn secondary" id="see-how-btn" >See how it works</a>
+    <div class="hero-visual">
+        <div class="mock-frame">
+            <div class="traffic-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+            </div>
+            <div class="mock-cards-row">
+                <div class="mock-stat-card">
+                    <span class="stat-label">This month</span>
+                    <span class="stat-value">₹18,240</span>
+                    <span class="stat-change red">+12% vs last</span>
+                </div>
+                <div class="mock-stat-card">
+                    <span class="stat-label">Budget left</span>
+                    <span class="stat-value">₹6,760</span>
+                    <span class="stat-change green">43% remaining</span>
+                </div>
+                <div class="mock-stat-card">
+                    <span class="stat-label">Transactions</span>
+                    <span class="stat-value">34</span>
+                    <span class="stat-change muted">this month</span>
+                </div>
+            </div>
+            <div class="mock-bars">
+                <div class="mock-bar-row">
+                    <span>Food</span>
+                    <div class="mock-bar-track"><div class="mock-bar orange" style="width:92%"></div></div>
+                </div>
+                <div class="mock-bar-row">
+                    <span>Travel</span>
+                    <div class="mock-bar-track"><div class="mock-bar blue" style="width:65%"></div></div>
+                </div>
+                <div class="mock-bar-row">
+                    <span>Bills</span>
+                    <div class="mock-bar-track"><div class="mock-bar purple" style="width:45%"></div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Dashboard Preview -->
-    <div class="hero-preview">
-      <div class="window-bar">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-
-      <div class="stats">
-        <div class="card">
-          <p>This month</p>
-          <h3>₹18,240</h3>
-          <span class="negative">+12% vs last</span>
-        </div>
-        <div class="card">
-          <p>Budget left</p>
-          <h3>₹6,760</h3>
-          <span class="positive">43% remaining</span>
-        </div>
-        <div class="card">
-          <p>Transactions</p>
-          <h3>34</h3>
-          <span>this month</span>
-        </div>
-      </div>
-
-      <div class="bars">
-        <div class="bar">
-          <label>Food</label>
-          <div class="track">
-            <div class="fill food"></div>
-          </div>
-        </div>
-
-        <div class="bar">
-          <label>Travel</label>
-          <div class="track">
-            <div class="fill travel"></div>
-          </div>
-        </div>
-
-        <div class="bar">
-          <label>Bills</label>
-          <div class="track">
-            <div class="fill bills"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Modal: How it Works Video -->
-  <div id="howitworks-modal" class="modal-overlay" style="display:none;">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="howitworks-title">
-      <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
-      <div class="modal-video-wrap">
-        <iframe id="howitworks-iframe" width="560" height="315"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" title="How Spendly Works" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-
 </section>
 
 <section class="features">
-  <div class="features-inner">
-    <div class="feature-card">
-      <div class="feature-icon">₹</div>
-      <h3 class="feature-title">Log expenses instantly</h3>
-      <p class="feature-body">Add any expense in seconds. Category, amount, date, description — all in one simple form.
-      </p>
+    <div class="features-inner">
+        <div class="feature-card">
+            <div class="feature-icon">₹</div>
+            <h3 class="feature-title">Log expenses instantly</h3>
+            <p class="feature-body">Add any expense in seconds. Category, amount, date, description — all in one simple form.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">◎</div>
+            <h3 class="feature-title">Understand your patterns</h3>
+            <p class="feature-body">See exactly where your money goes with category breakdowns and monthly summaries.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">◷</div>
+            <h3 class="feature-title">Filter by time period</h3>
+            <p class="feature-body">View your spending for any date range — last week, last month, or a custom period.</p>
+        </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">◎</div>
-      <h3 class="feature-title">Understand your patterns</h3>
-      <p class="feature-body">See exactly where your money goes with category breakdowns and monthly summaries.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">◷</div>
-      <h3 class="feature-title">Filter by time period</h3>
-      <p class="feature-body">View your spending for any date range — last week, last month, or a custom period.</p>
-    </div>
-  </div>
 </section>
 
 <section class="cta-section">
-  <div class="cta-inner">
-    <h2 class="cta-title">Ready to take control?</h2>
-    <p class="cta-body">Join thousands of people who track their expenses with Spendly.</p>
-    <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-  </div>
+    <div class="cta-inner">
+        <h2 class="cta-title">Ready to take control?</h2>
+        <p class="cta-body">Join thousands of people who track their expenses with Spendly.</p>
+        <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
+    </div>
 </section>
 
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<div id="video-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <h3>See how it works</h3>
+        <iframe id="yt-frame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<script>
+function openModal() {
+    document.getElementById("video-modal").style.display = "flex";
+    document.getElementById("yt-frame").src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+}
+function closeModal(e) {
+    if (!e || e.target === document.getElementById("video-modal")) {
+        document.getElementById("video-modal").style.display = "none";
+        document.getElementById("yt-frame").src = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+    }
+}
+</script>
 {% endblock %}

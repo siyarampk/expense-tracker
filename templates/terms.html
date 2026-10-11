@@ -1,54 +1,45 @@
 {% extends "base.html" %}
 
-{% block title %}Spendly — Terms & Conditions{% endblock %}
+{% block title %}Terms and Conditions — Spendly{% endblock %}
 
 {% block content %}
+<div class="terms-container">
+    <h1 class="terms-title">Terms and Conditions</h1>
+    <p class="terms-meta">Last updated: October 11, 2026</p>
 
-<section class="content-page">
-  <div class="container">
-    <h1 class="title">Terms and Conditions</h1>
-
-    <div class="legal-content">
-      <h2>Acceptance of Terms</h2>
-      <p>By using Spendly, you agree to be bound by these Terms and Conditions. Please read carefully:</p>
-      <ol>
-        <li>Continue use of services indicates acceptance</li>
-        <li>Acknowledge your legal responsibility for account data</li>
-      </ol>
-
-      <h2>Use of Service</h2>
-      <p>Your use of Spendly must:</p>
-      <ul>
-        <li>Comply with all applicable local, state, and federal laws</li>
-        <li>Not be used for fraudulent activities or unauthorized transactions</li>
-        <li>Not attempt to abuse or overload the service</li>
-      </ul>
-
-      <h2>User Data</h2>
-      <p>Spendly collects and stores:</p>
-      <ul>
-        <li>Basic account information (name, email address)</li>
-        <li>Transaction history and spending patterns</li>
-        <li>Preferences for budgeting and categorization</li>
-      </ul>
-
-      <h2>Limitations of Liability</h2>
-      <p>We provide the service "as is" and do not guarantee:</p>
-      <ul>
-        <li>Uninterrupted or error-free service availability</li>
-        <li>Complete accuracy of imported or manually entered data</li>
-        <li>Absolute protection against unauthorized access</li>
-      </ul>
-
-      <h2>Changes to Terms</h2>
-      <p>These terms may be updated periodically:</p>
-      <ul>
-        <li>Changes will be posted with a new effective date</li>
-        <li>Users continuing to use the site after changes are bound</li>
-        <li>Significant changes may be communicated via email</li>
-      </ul>
+    <div class="terms-section">
+        <h2>Acceptance of Terms</h2>
+        <p>By accessing or using the Spendly application, you agree to be bound by these Terms and Conditions. This agreement governs your use of the service, the data you enter, and any interaction with the platform. These terms apply whether you access Spendly through the web interface or any future clients we may release.</p>
+        <p>If you do not agree to all parts of this agreement, you should not use the service. We reserve the right to modify these terms at any time, and continued use after such changes constitutes acceptance of the revised terms.</p>
+    <p>We encourage you to review these terms regularly and reach out if anything is unclear.</p>
     </div>
-  </div>
-</section>
 
+    <div class="terms-section">
+        <h2>Use of Service</h2>
+        <p>You agree to use Spendly only for lawful purposes and in a manner consistent with all applicable laws and regulations. The application is intended solely for personal, non-commercial expense tracking by a single user. You must not attempt to access other users' data or interfere with the underlying database or server infrastructure.</p>
+        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must provide accurate and complete information when registering, and update it promptly if anything changes.</p>
+    <p>We encourage you to review these terms regularly and reach out if anything is unclear.</p>
+    </div>
+
+    <div class="terms-section">
+        <h2>User Data</h2>
+        <p>Spendly stores your expense records locally in an encrypted SQLite database on your device. We do not upload your financial data to external servers, and we do not share your information with third-party advertisers, brokers, or analytics partners. You retain full ownership and control over every entry you make.</p>
+        <p>You may review, edit, or delete your data at any time. Deleting the local database file will permanently remove all stored records. Because data is local, we recommend maintaining your own backups if you wish to preserve your history across devices or reinstalls.</p>
+    <p>We encourage you to review these terms regularly and reach out if anything is unclear.</p>
+    </div>
+
+    <div class="terms-section">
+        <h2>Limitations of Liability</h2>
+        <p>Spendly is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not guarantee that the service will be uninterrupted, secure, or free of errors. Calculations shown in reports are for personal organization only and should be verified for any official or tax purpose.</p>
+        <p>To the fullest extent permitted by applicable law, we are not liable for any indirect, incidental, special, or consequential damages arising from your use of Spendly, including but not limited to loss of data, incorrect totals, or downtime.</p>
+    <p>We encourage you to review these terms regularly and reach out if anything is unclear.</p>
+    </div>
+
+    <div class="terms-section">
+        <h2>Changes to Terms</h2>
+        <p>We may revise these Terms and Conditions periodically to reflect updates to the application, legal requirements, or business practices. When we make material changes, we will update the "Last updated" date displayed on this page and may provide additional notice through the interface.</p>
+        <p>Continued use of Spendly after any modifications are posted means you accept the revised terms. If you do not agree with the updated terms, you must stop using the service immediately. We encourage you to review this page regularly to stay informed of any changes.</p>
+    </div>
+<p>We encourage you to review these terms regularly and reach out if anything is unclear.</p>
+    </div>
 {% endblock %}

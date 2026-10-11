@@ -1,11 +1,7 @@
 from flask import Flask, render_template
-from database.db import init_db, seed_db
 
 app = Flask(__name__)
 
-with app.app_context():
-    init_db()
-    seed_db()
 
 # ------------------------------------------------------------------ #
 # Routes                                                              #
@@ -25,9 +21,11 @@ def register():
 def login():
     return render_template("login.html")
 
+
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
+
 
 @app.route("/privacy")
 def privacy():
