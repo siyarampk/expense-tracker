@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Spendly{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="legal-content">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: October 2026</p>
+
+        <section>
+            <h2>1. Data We Collect</h2>
+            <p>We collect only the information you provide directly: your name, email address, and the expense entries you choose to log. We do not collect payment card details or banking credentials.</p>
+        </section>
+
+        <section>
+            <h2>2. How We Use Your Data</h2>
+            <p>Your data is used solely to provide and improve the Spendly experience — displaying your expense history, generating summaries, and ensuring secure access to your account.</p>
+        </section>
+
+        <section>
+            <h2>3. Data Storage</h2>
+            <p>All data is stored in encrypted SQLite databases with foreign keys enabled. We do not share your information with advertising networks or data brokers.</p>
+        </section>
+
+        <section>
+            <h2>4. Third Party Services</h2>
+            <p>We rely on Google Fonts for typography and standard web infrastructure. These services may collect anonymous usage data but do not receive your financial records.</p>
+        </section>
+
+        <section>
+            <h2>5. Contact Us</h2>
+            <p>If you have questions about this policy or your data, please reach out through the app or contact our support team.</p>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+<style>
+.page-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+.legal-content h1 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 8px; color: var(--ink); }
+.last-updated { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 40px; }
+.legal-content section { margin-bottom: 32px; }
+.legal-content h2 { font-family: var(--font-body); font-weight: 600; font-size: 1.2rem; margin-bottom: 12px; color: var(--ink); }
+.legal-content p { color: var(--ink-soft); line-height: 1.7; }
+</style>
+{% endblock %}
