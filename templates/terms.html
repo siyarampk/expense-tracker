@@ -2,71 +2,98 @@
 
 {% block title %}Terms and Conditions — Spendly{% endblock %}
 
-{% block content %}
-<div class="page-container">
-    <div class="legal-content">
-        <h1>Terms and Conditions</h1>
-        <p class="last-updated">Last updated: October 2026</p>
-
-        <section>
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing and using Spendly, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this service.</p>
-        </section>
-
-        <section>
-            <h2>2. Use of Service</h2>
-            <p>Spendly is a personal expense tracking tool intended for individual, non-commercial use only. You agree to use this service responsibly and not for any unlawful purpose.</p>
-        </section>
-
-        <section>
-            <h2>3. User Data</h2>
-            <p>You retain full ownership of all data you enter into Spendly. We do not claim any rights to your personal financial information. All expense data is stored locally on your device or our secure servers, and you can request deletion of your data at any time.</p>
-        </section>
-
-        <section>
-            <h2>4. Limitations of Liability</h2>
-            <p>Spendly is provided "as is" without any warranties, express or implied. We do not guarantee the accuracy of financial calculations. You should verify all expense totals and reports for your records.</p>
-        </section>
-
-        <section>
-            <h2>5. Changes to Terms</h2>
-            <p>We reserve the right to modify these terms at any time. Continued use of Spendly after any changes constitutes acceptance of the new terms.</p>
-        </section>
-    </div>
-</div>
-{% endblock %}
-
 {% block head %}
 <style>
-.page-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-.legal-content h1 {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    margin-bottom: 8px;
-    color: var(--ink);
-}
-.last-updated {
-    color: var(--ink-muted);
-    font-size: 0.9rem;
-    margin-bottom: 40px;
-}
-.legal-content section {
-    margin-bottom: 32px;
-}
-.legal-content h2 {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    color: var(--ink);
-}
-.legal-content p {
-    color: var(--ink-soft);
-    line-height: 1.7;
-}
+    .terms-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+    }
+    .terms-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+    }
+    .terms-meta {
+        color: var(--ink-muted);
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+    }
+    .terms-section {
+        margin-bottom: 2rem;
+    }
+    .terms-section h2 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        color: var(--ink);
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+    .terms-section h2:first-child {
+        border-bottom: none;
+    }
+    .terms-section p,
+    .terms-section li {
+        color: var(--ink-soft);
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
+    }
+    .terms-section ul {
+        padding-left: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
 </style>
+{% endblock %}
+
+{% block content %}
+<div class="terms-container">
+    <h1 class="terms-title">Terms and Conditions</h1>
+    <p class="terms-meta">Last updated: October 11, 2026</p>
+
+    <div class="terms-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>Welcome to Spendly. By accessing or using this personal expense tracking application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the service.</p>
+        <p>Spendly is provided as a single-user tool to help you track your personal spending. These terms govern your use of the application and the data you store within it.</p>
+    </div>
+
+    <div class="terms-section">
+        <h2>2. Use of the Service</h2>
+        <p>When you use Spendly, you agree to:</p>
+        <ul>
+            <li>Use the application only for lawful purposes and in a way that does not infringe the rights of others.</li>
+            <li>Keep your account credentials secure and responsible for all activity under your account.</li>
+            <li>Provide accurate and complete information when creating your account.</li>
+            <li>Not use the application to collect or aggregate data for any third party.</li>
+            <li>Not attempt to gain unauthorized access to the application or its underlying data.</li>
+        </ul>
+    </div>
+
+    <div class="terms-section">
+        <h2>3. User Data</h2>
+        <p>Spendly is designed as a private, single-user expense tracker. Here is what you should know about your data:</p>
+        <ul>
+            <li><strong>What we collect:</strong> When you log an expense, you enter information such as the amount, category (for example, Bills, Food, Health, or Transport), date, and an optional description.</li>
+            <li><strong>Where it lives:</strong> All your data is stored locally in a SQLite database file on your own device. It is not uploaded to any external server and is not shared with third parties.</li>
+            <li><strong>Your control:</strong> Because your data stays on your device, you have full ownership of it. You can review, edit, or delete your records at any time. Deleting the local database file removes all your stored expenses.</li>
+            <li><strong>Backups:</strong> Since your data is stored locally, it is your responsibility to back up your database if you want to keep your records safe across device changes.</li>
+        </ul>
+    </div>
+
+    <div class="terms-section">
+        <h2>4. Limitations of Liability</h2>
+        <p>Spendly is provided on an "as is" and "as available" basis, without any warranties of any kind, either express or implied. To the fullest extent permitted by law:</p>
+        <ul>
+            <li>Spendly does not warrant that the application will be uninterrupted, secure, or free of errors.</li>
+            <li>The application is not a substitute for professional financial, legal, or tax advice. The information and features provided are for personal organization purposes only.</li>
+            <li>You use Spendly at your own risk. We are not liable for any losses, including loss of data, incorrect calculations, or any damages arising from your use of the application.</li>
+        </ul>
+    </div>
+
+    <div class="terms-section">
+        <h2>5. Changes to These Terms</h2>
+        <p>We may update these Terms and Conditions from time to time to reflect changes in our application or legal requirements. When we do, we will update the "Last updated" date at the top of this page. Your continued use of Spendly after any changes means you accept the new terms. We encourage you to review these terms periodically.</p>
+    </div>
+</div>
 {% endblock %}
