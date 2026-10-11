@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — Spendly{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+    <div class="dashboard-header">
+        <h1>Welcome back, {{ user_name }}!</h1>
+        <a href="{{ url_for('add_expense') }}" class="btn-add-expense">+ Add Expense</a>
+    </div>
+
+    <div class="dashboard-summary">
+        <div class="summary-card">
+            <span class="summary-label">This Month</span>
+            <span class="summary-value">₹{{ "{:,}".format(monthly_total|int) }}</span>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="expenses-section">
+            <h2>Recent Expenses</h2>
+            {% if expenses %}
+            <div class="expenses-list">
+                {% for expense in expenses %}
+                <div class="expense-item">
+                    <div class="expense-info">
+                        <span class="expense-category">{{ expense.category }}</span>
+                        {% if expense.description %}
+                        <span class="expense-desc">{{ expense.description }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="expense-meta">
+                        <span class="expense-amount">₹{{ "{:,.0f}".format(expense.amount) }}</span>
+                        <span class="expense-date">{{ expense.date }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-state">No expenses yet. Add your first expense!</p>
+            {% endif %}
+        </div>
+
+        <div class="categories-section">
+            <h2>By Category</h2>
+            {% if category_totals %}
+            <div class="category-list">
+                {% for cat in category_totals %}
+                <div class="category-item">
+                    <span class="category-name">{{ cat.category }}</span>
+                    <span class="category-amount">₹{{ "{:,.0f}".format(cat.total|int) }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-state">No categories yet</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

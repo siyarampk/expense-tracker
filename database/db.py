@@ -1,7 +1,44 @@
 import sqlite3
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 DB_PATH = "expense_tracker.db"
+
+
+def create_user(name, email, password):
+    """Create a new user. Returns (user_id, error) tuple."""
+    conn = get_db()
+    try:
+        password_hash = generate_password_hash(password)
+        cursor = conn.execute(
+            "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
+            (name, email, password_hash)
+        )
+        conn.commit()
+        return (cursor.lastrowid, None)
+    except sqlite3.IntegrityError:
+        return (None, "An account with this email already exists")
+    finally:
+        conn.close()
+
+
+def get_user_by_email(email):
+    """Get user by email. Returns a Row or None."""
+    conn = get_db()
+    try:
+        return conn.execute(
+            "SELECT id, name, email, password_hash, created_at FROM users WHERE email = ?",
+            (email,)
+        ).fetchone()
+    finally:
+        conn.close()
+
+
+def verify_user(email, password):
+    """Verify user credentials. Returns user dict if valid, None otherwise."""
+    user = get_user_by_email(email)
+    if user and check_password_hash(user["password_hash"], password):
+        return {"id": user["id"], "name": user["name"], "email": user["email"]}
+    return None
 
 
 def get_db():
