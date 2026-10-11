@@ -119,61 +119,7 @@ a { color: inherit; text-decoration: none; }
 
 .main-content { min-height: calc(100vh - 60px - 100px); }
 
-/* ------------------------------------------------------------------ */
-/* Hero                                                                */
-/* ------------------------------------------------------------------ */
-
-.hero {
-    padding: 5rem 2rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.hero-badge {
-    display: inline-block;
-    background: var(--accent-light);
-    color: var(--accent);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.35rem 0.85rem;
-    border-radius: 999px;
-    margin-bottom: 1.5rem;
-}
-
-.hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 1.25rem;
-}
-
-.hero-title em {
-    font-style: italic;
-    color: var(--accent);
-}
-
-.hero-subtitle {
-    font-size: 1.05rem;
-    color: var(--ink-muted);
-    line-height: 1.7;
-    max-width: 460px;
-    margin-bottom: 2rem;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
+/* Hero redesign styles loaded from landing.css merge (see bottom of file) */
 /* ------------------------------------------------------------------ */
 /* Mock card (hero visual)                                             */
 /* ------------------------------------------------------------------ */
@@ -576,3 +522,49 @@ a { color: inherit; text-decoration: none; }
     .nav-links a:not(.nav-cta) { display: none; }
     .hero { padding: 3rem 1rem 2rem; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Landing hero redesign (merged from landing.css)                     */
+/* ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ */
+/* Landing hero redesign                                               */
+/* ------------------------------------------------------------------ */
+
+.hero-badge { display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; background:#d4ede8; color:#1a7f5f; font-size:0.75rem; font-weight:600; letter-spacing:0.05em; text-transform:capitalize; padding:0.45rem 1rem; border-radius:20px; margin-bottom:2rem; }
+.badge-dot { width:6px; height:6px; background:#1a7f5f; border-radius:50%; display:inline-block; }
+.hero { padding:5rem 2rem 4rem; display:flex; flex-direction:column; align-items:center; text-align:center; max-width:1200px; margin:0 auto; }
+.hero-inner { width:100%; max-width:900px; margin-bottom:3rem; }
+.hero-title { font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2.8rem,6vw,4.5rem); line-height:1.15; letter-spacing:-0.01em; color:#1a1a1a; margin-bottom:0.5rem; text-align:center; font-weight:700; }
+.hero-title em { font-style:italic; color:#1a7f5f; font-size:1.15em; font-weight:700; }
+.hero-subtitle { font-size:1rem; color:#888; line-height:1.8; margin-bottom:2.5rem; text-align:center; font-weight:400; max-width:600px; margin-left:auto; margin-right:auto; }
+.btn-black { display:inline-block; background:#0f0f0f; color:#fff; padding:0.8rem 2rem; border-radius:16px; font-family:'DM Sans',system-ui,sans-serif; font-size:0.95rem; font-weight:500; text-decoration:none; transition:background .2s; }
+.btn-black:hover { background:#1a472a; }
+.hero-actions { display:flex; gap:1.2rem; justify-content:center; align-items:center; margin-bottom:2rem; }
+.hero-visual { width:100%; max-width:900px; }
+.mock-frame { background:#f5f2ed; border:1px solid #e8e5de; border-radius:24px; padding:2.5rem; width:100%; }
+.traffic-dots { display:flex; gap:0.5rem; margin-bottom:1.5rem; }
+.dot-red { width:14px; height:14px; background:#e67e7e; border-radius:50%; }
+.dot-yellow { width:14px; height:14px; background:#e8c870; border-radius:50%; }
+.dot-green { width:14px; height:14px; background:#7fb88a; border-radius:50%; }
+.mock-cards-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-bottom:2rem; }
+.mock-stat-card { background:#fff; border:1px solid #e8e5de; border-radius:16px; padding:1.5rem 1.2rem; text-align:center; }
+.stat-label { display:block; font-size:0.8rem; color:#999; text-transform:capitalize; letter-spacing:0.02em; margin-bottom:0.4rem; text-align:center; font-weight:500; }
+.stat-value { display:block; font-family:'DM Serif Display',Georgia,serif; font-size:1.6rem; color:#1a1a1a; margin-bottom:0.35rem; text-align:center; font-weight:700; }
+.stat-change { font-size:0.8rem; font-weight:500; text-align:center; display:block; }
+.stat-change.red { color:#e67e7e; }
+.stat-change.green { color:#7fb88a; }
+.stat-change.muted { color:#aaa; }
+.mock-bars { display:flex; flex-direction:column; gap:1rem; }
+.mock-bar-row { display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#333; }
+.mock-bar-row span { width:70px; font-weight:500; text-align:left; }
+.mock-bar-track { flex:1; height:10px; background:#e8e5de; border-radius:6px; overflow:hidden; }
+.mock-bar { height:100%; border-radius:6px; }
+.mock-bar.orange { background:#d69e2e; }
+.mock-bar.blue { background:#4a90c6; }
+.mock-bar.purple { background:#8b6fb3; }
+.modal-overlay { position:fixed; inset:0; background:rgba(15,15,15,0.6); z-index:200; display:none; align-items:center; justify-content:center; padding:2rem; }
+.modal-box { background:#fff; border-radius:20px; padding:2rem; max-width:720px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.15); position:relative; }
+.modal-close { position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; color:#999; cursor:pointer; line-height:1; }
+.modal-box h3 { font-family:'DM Serif Display',Georgia,serif; font-size:1.5rem; margin-bottom:1rem; color:#1a1a1a; text-align:center; }
+.modal-box iframe { width:100%; aspect-ratio:16/9; border-radius:6px; border:none; }
