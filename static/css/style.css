@@ -576,6 +576,11 @@ a { color: inherit; text-decoration: none; }
     .nav-links a:not(.nav-cta) { display: none; }
     .hero { padding: 3rem 1rem 2rem; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Landing hero redesign (merged from landing.css)                     */
+/* ------------------------------------------------------------------ */
+
 .hero-badge { display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; background:#d4ede8; color:#1a7f5f; font-size:0.75rem; font-weight:600; letter-spacing:0.05em; text-transform:capitalize; padding:0.45rem 1rem; border-radius:20px; margin-bottom:2rem; }
 .badge-dot { width:6px; height:6px; background:#1a7f5f; border-radius:50%; display:inline-block; }
 .hero { padding:5rem 2rem 4rem; display:flex; flex-direction:column; align-items:center; text-align:center; max-width:1200px; margin:0 auto; }
