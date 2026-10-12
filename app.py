@@ -1,5 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from database.db import get_db, init_db, seed_db, create_user, get_user_by_email, verify_user
+from database.db import (
+    init_db,
+    seed_db,
+    create_user,
+    get_user_by_email,
+    verify_user,
+    get_user_by_id,
+    get_summary_stats,
+    get_recent_transactions,
+    get_category_breakdown,
+)
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key-change-in-production"
@@ -98,12 +108,56 @@ def logout():
 
 @app.route("/profile")
 def profile():
-    if not session.get("user_id"): return redirect(url_for("login"))
-    db = get_db()
-    user = db.execute("SELECT * FROM users WHERE id=?", (session["user_id"],)).fetchone()
-    expenses = db.execute("SELECT * FROM expenses WHERE user_id=? ORDER BY date DESC LIMIT 5", (session["user_id"],)).fetchall()
-    stats={"total":"₹12,450.75","count":len(expenses),"top_category":"Food"}
-    return render_template("profile.html", user=user, expenses=expenses, stats=stats, transactions=expenses, categories=[{"name":"Food","amount":"2240","percent":55},{"name":"Bills","amount":"2200","percent":45},{"name":"Transport","amount":"500","percent":15},{"name":"Health","amount":"800","percent":20}])
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
+
+    user_id = session["user_id"]
+    date_from = request.args.get("date_from") or None
+    date_to = request.args.get("date_to") or None
+
+    user = get_user_by_id(user_id)
+    if user is None:
+        # Account was deleted out from under an active session.
+        session.clear()
+        return redirect(url_for("login"))
+
+    summary = get_summary_stats(user_id, date_from=date_from, date_to=date_to)
+    stats = {
+        "total": f"{summary['total_spent']:,.2f}",
+        "count": summary["transaction_count"],
+        "top_category": summary["top_category"],
+    }
+
+    expenses = [
+        {
+            "id": tx["id"],
+            "date": tx["date"],
+            "description": tx["description"],
+            "category": tx["category"],
+            "amount": f"{tx['amount']:,.2f}",
+        }
+        for tx in get_recent_transactions(user_id, date_from=date_from, date_to=date_to)
+    ]
+
+    categories = [
+        {
+            "name": cat["name"],
+            "amount": f"{cat['amount']:,.2f}",
+            "percent": cat["pct"],
+        }
+        for cat in get_category_breakdown(user_id, date_from=date_from, date_to=date_to)
+    ]
+
+    return render_template(
+        "profile.html",
+        user=user,
+        expenses=expenses,
+        stats=stats,
+        transactions=expenses,
+        categories=categories,
+        date_from=date_from,
+        date_to=date_to,
+    )
 
 
 @app.route("/expenses/add")
