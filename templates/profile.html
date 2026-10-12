@@ -83,11 +83,9 @@
                                 </td>
                                 <td class="tx-amount">₹{{ tx.amount }}</td>
                                 <td class="tx-actions">
-                                    <a href="{{ url_for('edit_expense', id=tx.id) }}" class="tx-edit-link">Edit</a>
-                                    <form method="POST" action="{{ url_for('delete_expense', id=tx.id) }}"
-                                          style="display:inline"
-                                          onsubmit="return confirm('Delete this expense?')">
-                                        <button type="submit" class="btn-delete">Delete</button>
+                                    <a href="{{ url_for('edit_expense', id=tx.id) }}" class="btn-small btn-edit">Edit</a>
+                                    <form method="POST" action="{{ url_for('delete_expense', id=tx.id) }}" style="display:inline;" onsubmit="return confirm('Delete this expense?')">
+                                        <button type="submit" class="btn-small btn-delete">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -105,7 +103,7 @@
             <!-- Category breakdown -->
             <div class="profile-section">
                 <h2 class="section-title">By Category</h2>
-                <div class="category-list">
+                <div class="category-breakdown">
                     {% for cat in categories %}
                     <div class="cat-row">
                         <div class="cat-row-header">

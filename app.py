@@ -103,7 +103,7 @@ def profile():
     user = db.execute("SELECT * FROM users WHERE id=?", (session["user_id"],)).fetchone()
     expenses = db.execute("SELECT * FROM expenses WHERE user_id=? ORDER BY date DESC LIMIT 5", (session["user_id"],)).fetchall()
     stats={"total":"₹12,450.75","count":len(expenses),"top_category":"Food"}
-    return render_template("profile.html", user=user, expenses=expenses, stats=stats, transactions=expenses, categories=[{"name":"Food","amt":"₹2,300.00"},{"name":"Bills","amt":"₹2,200.00"},{"name":"Transport","amt":"₹500.00"},{"name":"Health","amt":"₹800.00"}])
+    return render_template("profile.html", user=user, expenses=expenses, stats=stats, transactions=expenses, categories=[{"name":"Food","amount":"2240","percent":55},{"name":"Bills","amount":"2200","percent":45},{"name":"Transport","amount":"500","percent":15},{"name":"Health","amount":"800","percent":20}])
 
 
 @app.route("/expenses/add")
