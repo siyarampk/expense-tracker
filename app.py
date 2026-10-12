@@ -17,14 +17,14 @@ with app.app_context():
 @app.route("/")
 def landing():
     if session.get("user_id"):
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
     return render_template("landing.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if session.get("user_id"):
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
 
     if request.method == "POST":
         name = request.form.get("name", "").strip()
@@ -44,7 +44,7 @@ def register():
         session["user_id"] = user_id
         session["user_name"] = name
         flash("Account created successfully!")
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
 
     return render_template("register.html")
 
@@ -52,7 +52,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if session.get("user_id"):
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
 
     if request.method == "POST":
         email = request.form.get("email", "").strip().lower()
@@ -68,7 +68,7 @@ def login():
         session["user_id"] = user["id"]
         session["user_name"] = user["name"]
         flash("Welcome back!")
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("profile"))
 
     return render_template("login.html")
 
@@ -94,49 +94,16 @@ def logout():
     return redirect(url_for("landing"))
 
 
-@app.route("/dashboard")
-def dashboard():
-    if "user_id" not in session:
-        return redirect(url_for("login"))
-
-    user_id = session["user_id"]
-    conn = get_db()
-
-    # Get user's expenses ordered by date desc
-    expenses = conn.execute("""
-        SELECT id, amount, category, date, description, created_at
-        FROM expenses
-        WHERE user_id = ?
-        ORDER BY date DESC, created_at DESC
-    """, (user_id,)).fetchall()
-
-    # Get category totals for current month
-    category_totals = conn.execute("""
-        SELECT category, SUM(amount) as total
-        FROM expenses
-        WHERE user_id = ? AND strftime('%Y-%m', date) = strftime('%Y-%m', 'now')
-        GROUP BY category
-    """, (user_id,)).fetchall()
-
-    # Get total for current month
-    monthly_total = conn.execute("""
-        SELECT SUM(amount) as total
-        FROM expenses
-        WHERE user_id = ? AND strftime('%Y-%m', date) = strftime('%Y-%m', 'now')
-    """, (user_id,)).fetchone()["total"] or 0
-
-    conn.close()
-
-    return render_template("dashboard.html",
-                          expenses=expenses,
-                          category_totals=category_totals,
-                          monthly_total=monthly_total,
-                          user_name=session["user_name"])
 
 
 @app.route("/profile")
 def profile():
-    return "Profile page — coming in Step 4"
+    if not session.get("user_id"): return redirect(url_for("login"))
+    db = get_db()
+    user = db.execute("SELECT * FROM users WHERE id=?", (session["user_id"],)).fetchone()
+    expenses = db.execute("SELECT * FROM expenses WHERE user_id=? ORDER BY date DESC LIMIT 5", (session["user_id"],)).fetchall()
+    stats={"total":"₹12,450.75","count":len(expenses),"top_category":"Food"}
+    return render_template("profile.html", user=user, expenses=expenses, stats=stats, transactions=expenses, categories=[{"name":"Food","amt":"₹2,300.00"},{"name":"Bills","amt":"₹2,200.00"},{"name":"Transport","amt":"₹500.00"},{"name":"Health","amt":"₹800.00"}])
 
 
 @app.route("/expenses/add")
