@@ -1,3 +1,4 @@
+from datetime import date, datetime, timedelta
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database.db import (
     init_db,
@@ -10,6 +11,51 @@ from database.db import (
     get_recent_transactions,
     get_category_breakdown,
 )
+
+def _build_date_presets(today=None):
+    """Returns a dict mapping preset key -> (start_date, end_date) tuples.
+
+    - "this_month": first of current month -> today
+    - "last_3_months": first of the month 3 months ago -> today
+    - "last_6_months": first of the month 6 months ago -> today
+    """
+    today = today or date.today()
+    this_month_start = today.replace(day=1)
+
+    def months_ago_start(n):
+        year = this_month_start.year
+        month = this_month_start.month - n
+        while month <= 0:
+            month += 12
+            year -= 1
+        return this_month_start.replace(year=year, month=month)
+
+    return {
+        "this_month": (this_month_start, today),
+        "last_3_months": (months_ago_start(2), today),
+        "last_6_months": (months_ago_start(5), today),
+    }
+
+
+def _parse_date_filter(date_from, date_to):
+    """Validates date_from/date_to, applying spec fallback rules.
+
+    Returns (date_from, date_to, error) where date_from/date_to are either
+    well-formed 'YYYY-MM-DD' strings or None (absent/invalid), and error is
+    a user-facing message if the range was rejected, else None.
+    """
+    for value in (date_from, date_to):
+        if value is not None:
+            try:
+                datetime.strptime(value, "%Y-%m-%d")
+            except ValueError:
+                return None, None, None
+
+    if date_from is not None and date_to is not None and date_from > date_to:
+        return None, None, "Start date must be before end date."
+
+    return date_from, date_to, None
+
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key-change-in-production"
@@ -112,8 +158,25 @@ def profile():
         return redirect(url_for("login"))
 
     user_id = session["user_id"]
-    date_from = request.args.get("date_from") or None
-    date_to = request.args.get("date_to") or None
+    raw_date_from = request.args.get("date_from") or None
+    raw_date_to = request.args.get("date_to") or None
+    date_from, date_to, error = _parse_date_filter(raw_date_from, raw_date_to)
+    if error:
+        flash(error)
+
+    presets = _build_date_presets()
+    preset_bounds = {
+        key: (start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+        for key, (start, end) in presets.items()
+    }
+
+    if date_from is None and date_to is None:
+        active_preset = "all_time"
+    else:
+        active_preset = next(
+            (key for key, bounds in preset_bounds.items() if (date_from, date_to) == bounds),
+            None,
+        )
 
     user = get_user_by_id(user_id)
     if user is None:
@@ -157,6 +220,8 @@ def profile():
         categories=categories,
         date_from=date_from,
         date_to=date_to,
+        active_preset=active_preset,
+        preset_bounds=preset_bounds,
     )
 
 
