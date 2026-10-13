@@ -1,46 +1,5 @@
 {
-  "hooks": {
-    "SessionStart": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }],
-    "PreToolUse": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }],
-    "PostToolUse": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }],
-    "TaskCreated": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }],
-    "TaskCompleted": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }],
-    "SessionEnd": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/hooks/scripts/hook.sh"
-      }]
-    }]
+  "env": {
+    "AGENTS_OBSERVE_LOCAL_DATA_ROOT": "$CLAUDE_PROJECT_DIR"
   }
 }

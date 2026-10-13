@@ -24,7 +24,16 @@
 
         <!-- Filter bar -->
         <div class="filter-bar">
-            
+            <div class="filter-presets">
+                <a href="{{ url_for('profile', date_from=preset_bounds.this_month[0], date_to=preset_bounds.this_month[1]) }}"
+                   class="filter-preset-btn{% if active_preset == 'this_month' %} filter-preset-btn--active{% endif %}">This Month</a>
+                <a href="{{ url_for('profile', date_from=preset_bounds.last_3_months[0], date_to=preset_bounds.last_3_months[1]) }}"
+                   class="filter-preset-btn{% if active_preset == 'last_3_months' %} filter-preset-btn--active{% endif %}">Last 3 Months</a>
+                <a href="{{ url_for('profile', date_from=preset_bounds.last_6_months[0], date_to=preset_bounds.last_6_months[1]) }}"
+                   class="filter-preset-btn{% if active_preset == 'last_6_months' %} filter-preset-btn--active{% endif %}">Last 6 Months</a>
+                <a href="{{ url_for('profile') }}"
+                   class="filter-preset-btn{% if active_preset == 'all_time' %} filter-preset-btn--active{% endif %}">All Time</a>
+            </div>
             <div class="filter-divider"></div>
             <form class="filter-form" method="GET" action="{{ url_for('profile') }}">
                 <input type="date" name="date_from" class="filter-date-input"
@@ -33,6 +42,9 @@
                 <input type="date" name="date_to" class="filter-date-input"
                        value="{{ date_to or '' }}">
                 <button type="submit" class="filter-apply-btn">Apply</button>
+                {% if date_from or date_to %}
+                <a href="{{ url_for('profile') }}" class="filter-preset-btn">Clear</a>
+                {% endif %}
             </form>
         </div>
 
