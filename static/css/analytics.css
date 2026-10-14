@@ -1,0 +1,124 @@
+/* static/css/analytics.css */
+
+.analytics-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 60px - 140px);
+    padding: 3rem 1.5rem;
+    background: var(--paper-warm);
+}
+
+.analytics-card {
+    position: relative;
+    width: 100%;
+    max-width: 510px;
+    background: var(--paper-card);
+    border-radius: 24px;
+    box-shadow: 0 12px 22px -5px rgba(0, 0, 0, 0.14);
+    padding: 2.5rem 2.5rem 2.75rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.analytics-card-corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--paper-warm);
+}
+
+.analytics-card-corner--top {
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 100%;
+}
+
+.analytics-card-corner--bottom {
+    bottom: 0;
+    left: 0;
+    border-radius: 0 100% 0 0;
+}
+
+.analytics-icon {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin: 0.5rem auto 1.75rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(160deg, var(--accent), #142f22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(20, 59, 37, 0.16);
+}
+
+.analytics-clock {
+    font-size: 2.4rem;
+    color: var(--paper);
+    line-height: 1;
+}
+
+.analytics-badge {
+    position: relative;
+    display: inline-block;
+    background: var(--accent);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 0.6rem 1.3rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(20, 59, 37, 0.16);
+    margin-bottom: 1.5rem;
+}
+
+.analytics-title {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    letter-spacing: -0.3px;
+    color: var(--ink);
+    margin-bottom: 1rem;
+}
+
+.analytics-body {
+    position: relative;
+    color: var(--ink-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.analytics-dots {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.analytics-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.3;
+    animation: analytics-dot-pulse 2s ease-in-out infinite;
+}
+
+.analytics-dot:nth-child(2) { animation-delay: 0.42s; }
+.analytics-dot:nth-child(3) { animation-delay: 0.85s; }
+
+@keyframes analytics-dot-pulse {
+    0%, 15%, 30%, 100% { opacity: 0.3; }
+    21% { opacity: 1; }
+}
+
+.analytics-note {
+    position: relative;
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+}
