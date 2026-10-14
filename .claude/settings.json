@@ -1,5 +1,18 @@
 {
   "env": {
     "AGENTS_OBSERVE_LOCAL_DATA_ROOT": "$CLAUDE_PROJECT_DIR"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | { read -r cmd; if echo \"$cmd\" | grep -qE 'expense_tracker\\.db' && echo \"$cmd\" | grep -qE '(^|[^a-zA-Z])(rm|mv|truncate|unlink|dd|shred)([^a-zA-Z]|$)|>[[:space:]]*expense_tracker\\.db'; then jq -cn '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:\"\\ud83d\\udeab  Action blocked — database is protected\\n\\nThis command would delete or overwrite expense_tracker.db, the Spendly app database that holds real user data.\\n\\nA project safety hook stops destructive commands (rm, mv, truncate, dd, shred, redirect >) from touching this file.\\n\\nIf you genuinely need a clean database, delete it yourself outside Claude Code, then ask Claude to reinitialize it with init_db().\"}}'; else echo '{}'; fi; }"
+          }
+        ]
+      }
+    ]
   }
 }
