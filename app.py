@@ -1,15 +1,23 @@
+import math
+import os
+import secrets
 from datetime import date, datetime, timedelta
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database.db import (
     init_db,
     seed_db,
     create_user,
+    create_expense,
     get_user_by_email,
     verify_user,
     get_user_by_id,
     get_summary_stats,
     get_recent_transactions,
     get_category_breakdown,
+)
+
+ALLOWED_CATEGORIES = (
+    "Food", "Transport", "Bills", "Health", "Entertainment", "Shopping", "Other",
 )
 
 def _build_date_presets(today=None):
@@ -58,7 +66,9 @@ def _parse_date_filter(date_from, date_to):
 
 
 app = Flask(__name__)
-app.secret_key = "dev-secret-key-change-in-production"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
+# ⚠️  Set FLASK_SECRET_KEY in the environment for any non-local deployment —
+# the random fallback above means sessions won't survive a server restart.
 
 # Initialize database on startup
 with app.app_context():
@@ -232,9 +242,59 @@ def analytics():
     return render_template("analytics.html")
 
 
-@app.route("/expenses/add")
+@app.route("/expenses/add", methods=["GET", "POST"])
 def add_expense():
-    return "Add expense — coming in Step 7"
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        amount_raw = request.form.get("amount", "")
+        category = request.form.get("category", "")
+        date_raw = request.form.get("date", "")
+        description = request.form.get("description", "").strip()
+
+        try:
+            amount = float(amount_raw)
+            if not math.isfinite(amount) or amount <= 0:
+                raise ValueError
+        except ValueError:
+            return render_template(
+                "add_expense.html", error="Enter a valid amount greater than 0",
+                categories=ALLOWED_CATEGORIES, amount=amount_raw,
+                category=category, date=date_raw, description=description,
+            )
+
+        if category not in ALLOWED_CATEGORIES:
+            return render_template(
+                "add_expense.html", error="Select a valid category",
+                categories=ALLOWED_CATEGORIES, amount=amount_raw,
+                category=category, date=date_raw, description=description,
+            )
+
+        try:
+            datetime.strptime(date_raw, "%Y-%m-%d")
+        except ValueError:
+            return render_template(
+                "add_expense.html", error="Enter a valid date",
+                categories=ALLOWED_CATEGORIES, amount=amount_raw,
+                category=category, date=date_raw, description=description,
+            )
+
+        _, error = create_expense(session["user_id"], amount, category, date_raw, description or None)
+        if error:
+            return render_template(
+                "add_expense.html", error=error,
+                categories=ALLOWED_CATEGORIES, amount=amount_raw,
+                category=category, date=date_raw, description=description,
+            )
+
+        flash("Expense added!")
+        return redirect(url_for("profile"))
+
+    today = date.today().strftime("%Y-%m-%d")
+    return render_template(
+        "add_expense.html", categories=ALLOWED_CATEGORIES, date=today,
+    )
 
 
 @app.route("/expenses/<int:id>/edit")

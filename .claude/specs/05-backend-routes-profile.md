@@ -82,23 +82,21 @@ File: `tests/test_backend_connection.py`
 `GET /profile` — unauthenticated:
 - Redirects to `/login` (302)
 
-`GET /profile` — authenticated as seed user:
+`GET /profile` — authenticated as a freshly registered user:
 - Returns 200
-- Response contains the seed user's name ("Demo User")
-- Response contains the seed user's email ("demo@spendly.com")
+- Response contains the registered user's name
+- Response contains the registered user's email
 - Response contains ₹ symbol
-- `total_spent` matches sum of all seed expenses (346.24)
-- `transaction_count` is 8
-- `top_category` is "Bills" (highest single-category total)
-- Transaction list appears in newest-first order
-- Category breakdown contains all 7 categories
+- A new user with no expenses shows ₹0.00 total spent, 0 transactions, and
+  an empty category breakdown
 
 ## Definition of done
-- [ ] Logging in as the seed user (demo@spendly.com / demo123) shows "Demo User" and "demo@spendly.com" on the profile page — not the hardcoded strings
-- [ ] Total spent displayed on the profile page equals ₹346.24
-- [ ] Transaction count displayed is 8
-- [ ] Top category displayed is "Bills"
-- [ ] Transaction list shows 8 rows ordered newest date first
-- [ ] Category breakdown shows 7 categories with percentages that add up to 100 %
+- [ ] Registering a new user and visiting `/profile` shows that user's name
+  and email on the profile page
+- [ ] Total spent displayed for a new user is ₹0.00
+- [ ] Transaction count displayed for a new user is 0
+- [ ] Category breakdown is empty for a new user, with no errors
+- [ ] After adding expenses, total spent, transaction count, top category,
+  and category breakdown all update to reflect them
+- [ ] Transaction list shows rows ordered newest date first
 - [ ] All amounts on the page display the ₹ symbol
-- [ ] Registering a brand-new user and visiting `/profile` shows ₹0.00 total spent, 0 transactions, and an empty category breakdown — no errors

@@ -105,6 +105,9 @@ Specific constraints Claude must follow. Always include:
 - No SQLAlchemy or ORMs
 - Parameterised queries only
 - Passwords hashed with werkzeug
+- No hardcoded usernames, passwords, API keys, tokens, or secrets anywhere in
+  source — read any such values from environment variables, never commit a
+  literal credential
 - Use CSS variables — never hardcode hex values
 - All templates extend `base.html`
 

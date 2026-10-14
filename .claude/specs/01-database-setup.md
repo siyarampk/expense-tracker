@@ -75,17 +75,10 @@ Nothing — this is the first step.
 
 ### C. `seed_db()`
 
-- Checks if `users` table already contains data
-    - If yes → return early (no duplication)
-- Inserts one demo user:
-    - name: Demo User
-    - email: demo@spendly.com
-    - password: demo123 (hashed using `werkzeug`)
-- Inserts **8 sample expenses**:
-    - All linked to demo user
-    - Cover multiple categories
-    - Dates spread across current month
-    - At least one expense per category
+- No-op: Spendly has no demo/seed accounts. Hardcoding a username and
+  password in source is a security risk for a public repository — users
+  register for real accounts via the `/register` flow instead, and start
+  with zero expenses.
 
 ---
 

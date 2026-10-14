@@ -1,0 +1,11 @@
+/* static/css/add_expense.css */
+
+select.form-input {
+    appearance: none;
+    background-color: var(--paper-card);
+    color: var(--ink-soft);
+}
+
+select.form-input:invalid {
+    color: var(--ink-faint);
+}
