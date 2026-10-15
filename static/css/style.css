@@ -242,6 +242,40 @@ a { color: inherit; text-decoration: none; }
     color: var(--ink);
 }
 
+.btn-small {
+    display: inline-block;
+    background: transparent;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-edit {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-edit:hover {
+    background: var(--accent);
+    color: var(--paper);
+}
+
+.btn-delete {
+    color: #b3261e;
+    border-color: #b3261e;
+}
+
+.btn-delete:hover {
+    background: #b3261e;
+    color: var(--paper);
+}
+
 /* ------------------------------------------------------------------ */
 /* Features section                                                    */
 /* ------------------------------------------------------------------ */
