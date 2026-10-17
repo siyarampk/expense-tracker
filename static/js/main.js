@@ -11,4 +11,43 @@ document.addEventListener("DOMContentLoaded", () => {
             button.textContent = isHidden ? "🙈" : "👁";
         });
     });
+
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.getElementById("main-nav");
+
+    if (!navToggle || !navMenu) return;
+
+    const closeNav = (restoreFocus = false) => {
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.classList.remove("is-open");
+        navMenu.classList.remove("is-open");
+        if (restoreFocus) navToggle.focus();
+    };
+
+    const toggleNav = () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.classList.toggle("is-open", !isOpen);
+        navMenu.classList.toggle("is-open", !isOpen);
+    };
+
+    navToggle.addEventListener("click", toggleNav);
+
+    navMenu.addEventListener("click", (event) => {
+        if (event.target.closest("a")) closeNav();
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest(".nav-inner")) closeNav();
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && navToggle.getAttribute("aria-expanded") === "true") {
+            closeNav(true);
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth >= 900) closeNav();
+    });
 });
